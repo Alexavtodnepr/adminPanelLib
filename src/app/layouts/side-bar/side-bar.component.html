@@ -1,0 +1,28 @@
+<div class="button-menu-wrap" >
+  <app-button-menu class="button-menu" [ngClass]="{'collapsed' : settingService.isCollapsedMenu()}"></app-button-menu>
+</div>
+<div class="menu">
+    <mat-nav-list class="menu-item">
+        @for (link of sideBarItems; track link) {
+            @if (settingService.isCollapsedMenu()) {
+                <a mat-list-item [ngClass]="{'collapsed' : settingService.isCollapsedMenu()}" [routerLink]="link.route" [activated]="isActiveRoute(link.route)" matTooltip="{{link.name}}">
+                    <mat-icon *ngIf="link.icon.length">{{ link.icon }}</mat-icon>
+                </a>
+            } @else {
+                <a class="menu-list-item" mat-list-item [routerLink]="link.route" [activated]="isActiveRoute(link.route)">
+                    <mat-icon *ngIf="link.icon.length">{{ link.icon }}</mat-icon>
+                    {{ link.name }}
+                </a>
+            }
+        }
+    </mat-nav-list>
+    <mat-nav-list class="menu-item">
+        <a class="menu-list-item" [ngClass]="{'collapsed' : settingService.isCollapsedMenu()}" mat-list-item [routerLink]="'/settings'" [activated]="isActiveRoute('/settings')" matTooltip="Налаштування">
+            <mat-icon>settings</mat-icon>
+            {{ settingService.isCollapsedMenu() ? '' : 'Налаштування' }}
+        </a>
+        <a class="menu-list-item" [ngClass]="{'collapsed' : settingService.isCollapsedMenu()}" mat-list-item matTooltip="Вийти">
+            <mat-icon>exit_to_app</mat-icon>
+            {{ settingService.isCollapsedMenu() ? '' :'Вийти' }}</a>
+    </mat-nav-list>
+</div>

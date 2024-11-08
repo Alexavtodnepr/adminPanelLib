@@ -1,0 +1,16 @@
+<div [ngClass]="settingService.themeSignal()" class="content-container">
+    @if (!breakpointService.isHandset()) {
+        <app-side-bar class="sidebar" [ngClass]="{'collapsed' : settingService.isCollapsedMenu()}"></app-side-bar>
+    }
+    <div class="content-wrap">
+        <app-header class="header"></app-header>
+        <div class="content"
+             [ngStyle]="{ height: settingService.isHideFooter() ? 'calc(100vh - 60px)' : 'calc(100vh - 120px)'}">
+            <router-outlet></router-outlet>
+        </div>
+        @if (!settingService.isHideFooter()) {
+            <app-footer class="footer"></app-footer>
+        }
+    </div>
+
+</div>
